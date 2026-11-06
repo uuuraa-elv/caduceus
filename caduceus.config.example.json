@@ -1,0 +1,40 @@
+{
+  "preflight": true,
+  "endpoint": null,
+  "apiKeyEnv": "CADUCEUS_API_KEY",
+  "readKeyFromHermesConfig": true,
+  "models": [
+    "provider/deepseek-v4.1-flash",
+    "other-provider/deepseek-v4.1-flash"
+  ],
+  "toolsets": {
+    "coding": "terminal,file,todo",
+    "video": "terminal,file,todo,skills",
+    "full": ""
+  },
+  "branchPrefix": "hermes/",
+  "worktreeDir": "_hermes-wt",
+  "resultFile": "RESULT.md",
+  "ram": {
+    "gateGB": 1.5,
+    "cleanupBelowGB": 2.0,
+    "cleanOrphanBrowsers": true,
+    "cleanHermesLsp": true
+  },
+  "router": {
+    "port": null,
+    "startCommand": null
+  },
+  "fitRules": [
+    {
+      "pattern": "(?i)hyperframes",
+      "level": "FIT WARNING",
+      "message": "HyperFrames videos scored lowest when made by Hermes in our tests. Consider doing this one in Claude."
+    },
+    {
+      "pattern": "(?i)remotion|video|motion|animation",
+      "level": "FIT INFO",
+      "message": "Remotion drafts through Hermes score close to Claude but run much slower. Good when Claude usage is running low."
+    }
+  ]
+}
