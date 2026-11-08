@@ -86,7 +86,7 @@ function Test-Model($url, $key, $mdl, $cap) {
   if ($cap -match '^\d+$') { $b.max_tokens = [int]$cap }
   $tmp = Join-Path $env:TEMP "caduceus-ping-$PID.json"; Set-Content $tmp ($b | ConvertTo-Json -Depth 4 -Compress) -Encoding UTF8
   # The key goes to curl on stdin (-K -), never on the command line where other processes can read it.
-  $o = ("header = \"Authorization: Bearer $key\"" | curl.exe -s -m 90 -K - "$url/chat/completions" -H "Content-Type: application/json" --data-binary "@$tmp") -join ''
+  $o = ("header = `"Authorization: Bearer $key`"" | curl.exe -s -m 90 -K - "$url/chat/completions" -H "Content-Type: application/json" --data-binary "@$tmp") -join ''
   Remove-Item $tmp -ErrorAction SilentlyContinue
   if ($o -match '"content":"') { return $null }
   # Routers wrap the upstream error as escaped JSON inside their own; the innermost message is the useful one.
